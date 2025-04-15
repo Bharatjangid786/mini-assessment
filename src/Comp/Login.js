@@ -6,12 +6,36 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // Add authentication logic here
+  
+    const payload = {
+      email: email,
+      password: password,
+    };
+  
+    try {
+      const response = await fetch('http://192.168.29.159:8080/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+  
+      const result = await response.text(); // if backend returns plain text
+      if (response.ok) {
+        console.log('✅ Login successful:', result);
+        alert(result || 'Login successful!');
+        // Redirect or store token here
+      } else {
+        console.warn('❌ Login failed:', result);
+        alert(result || 'Login failed. Please check your credentials.');
+      }
+    } catch (error) {
+      console.error('❌ Network error:', error);
+      alert('Network error during login. Please try again.');
+    }
   };
+  
 
   return (
     <div className="login-container">

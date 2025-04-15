@@ -28,55 +28,29 @@ const Register = () => {
     }
   
 
-    // const payload = {
-    //     registration: {
-    //       applicationId: "10000000-0000-0002-0000-000000000001",
-    //       data: {
-    //         displayName: "Johnny",
-    //         favoriteSports: ["Football", "Basketball"]
-    //       },
-    //       id: "00000000-0000-0002-0000-000000000000",
-    //       preferredLanguages: ["en", "fr"],
-    //       roles: ["user", "community_helper"],
-    //       timezone: "America/Chicago",
-    //       username: "johnny123"
-    //     }
-    //   };
     const payload = {
       id: 2,
-    //   name: formData.name,
-      name: 'Bharat Jangid',
-    //   email: formData.email,
-    email: 'jangidbharat2222@gmail.com',
-    //   password: formData.password,
-    password: "12345678",
+      name: formData.name,
+    //   name: 'Bharat Jangid',
+      email: formData.email,
+    // email: 'jangidbharat2004@gmail.com',
+      password: formData.password,
+    // password: "12345678",
     };
 
     try {
         console.log('BHje Rha hun bhai');
       setLoading(true);
-    //   const response = await fetch(`http://your-api-url.com/api/user/registration/${2}`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(payload),
-    //   });
-    //   const response = await fetch('http://192.168.29.159/auth/signup-to-otp', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(payload),
-    //   });
+
       
-      const response = await fetch('http:// 192.168.29.159/auth/signup-to-otp', {
+      const response = await fetch('http://192.168.29.159:8080/auth/signup-to-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-    //   console.log('bhje dya bhai response');
-      const result = await response.json();
+
+      const result = await response.text();
+ 
       setLoading(false);
 
       if (response.ok) {
@@ -86,23 +60,58 @@ const Register = () => {
         // Move to OTP input step
         setStep(2);
       } else {
+        console.log('bhje dya bhai response');
         alert(result.message || 'Registration failed');
         console.warn('❌ Error:', result);
       }
     } catch (error) {
       setLoading(false);
-      console.log('bhje dya bhai response');
+      
       console.error('❌ Network Error:', error);
       alert('Network error. Please try again.');
     }
   };
-
-  const handleOtpSubmit = (e) => {
+  const handleOtpSubmit = async (e) => {
     e.preventDefault();
-    alert(`OTP Submitted: ${formData.otp}`);
-    // You can handle OTP verification here
+  
+    const payload = {
+        otp: parseInt(formData.otp),
+        user: {
+          id: '2',
+          name: formData.name,
+          email: formData.email,
+          // email: 'jangidbharat2004@gmail.com',
+            password: formData.password,
+        }
+      };
+    try {
+      setLoading(true);
+  
+      const response = await fetch('http://192.168.29.159:8080/auth/verifyOtp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),  // Send JSON with direct OTP value
+      });
+  
+      const result = await response.text(); // assuming your backend returns plain text
+      setLoading(false);
+  
+      if (response.ok) {
+        console.log('✅ OTP Verified:', result);
+        alert(result || 'OTP verification successful!');
+        // Redirect or clear form here if needed
+      } else {
+        console.warn('❌ OTP Verification Failed:', result);
+        alert(result || 'OTP verification failed');
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error('❌ Network Error:', error);
+      alert('Network error during OTP verification. Please try again.');
+    }
   };
-
+  
+  
   return (
     <div className="register-container">
       <form className="register-form" onSubmit={step === 1 ? handleRegisterSubmit : handleOtpSubmit}>
