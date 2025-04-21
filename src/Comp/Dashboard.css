@@ -1,56 +1,77 @@
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f97316;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.nav-buttons button {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  color: #f97316;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-buttons button:hover {
+  background-color: #ffe2cc;
+}
+
+/* Main Container */
 .dashboard-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-  }
-  
-  .dashboard-card {
-    background-color: #f3f4f6; /* light gray */
-    padding: 2rem;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .dashboard-card label {
-    font-weight: bold;
-    margin-top: 1rem;
-  }
-  
-  .dashboard-card p,
-  .dashboard-card input {
-    margin-bottom: 0.5rem;
-    width: 100%;
-  }
-  
-  .dashboard-card input {
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #d1d5db;
-  }
-  
-  .dashboard-card button {
-    margin-top: 1rem;
-    background-color: #f97316;
-    color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 5px;
-    font-weight: 600;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .dashboard-card button:hover {
-    background-color: #ea580c;
-  }
-  
-  /* Responsive */
-  @media (max-width: 500px) {
-    .dashboard-card {
-      padding: 1.5rem;
-    }
-  }
-  
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Card */
+.dashboard-card {
+  background-color: #f8f8f8;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Inputs */
+.dashboard-card input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Buttons */
+.dashboard-card button {
+  padding: 10px 20px;
+  background-color: #f97316;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dashboard-card button:hover {
+  background-color: #fb923c;
+}
+
+.dashboard-container h2 {
+  text-align: center;
+  margin-top: 50px;
+}

@@ -1,9 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './NavBar.css';
+// import './NavBar.css';
+import './NavBarLogin.css';
 // import Login from './Comp/Login';
 // import Register from './Comp/Register';
-const NavBar = (props) => {
+const NavBarLogin = () => {
   const navigate = useNavigate();
 
   return (
@@ -12,10 +13,7 @@ const NavBar = (props) => {
       <div className="nav-buttons">
         {
            <>
-
-           <button onClick={() => 
-            
-            navigate('/login')}>Login</button>
+           <button onClick={() => navigate('/login')}>Login</button>
            <button onClick={() => navigate('/register')}>Register</button>
          </>
         }
@@ -24,4 +22,4 @@ const NavBar = (props) => {
   );
 };
 
-export default NavBar;
+export default NavBarLogin;
